@@ -19,7 +19,38 @@ const CUSTOM_PROPERTIES = [
 ];
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
-// * Code for Route 1 goes here
+app.get('/', async (req, res) => {
+    try {
+        const response = await axios.get(
+            `${HUBSPOT_API_BASE_URL}/${CUSTOM_OBJECT_TYPE_ID}`,
+            {
+                params: {
+                    properties: CUSTOM_PROPERTIES.join(','), // Request specific properties
+                    limit: 100 
+                },
+                headers: {
+                    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`, 
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+
+        const crmRecords = response.data.results; 
+
+        res.render('homepage', {
+            title: 'CRM Records | Integrating With HubSpot I Practicum',
+            crmRecords: crmRecords
+        });
+
+    } catch (error) {
+        console.error('Error fetching CRM data:', error.response ? error.response.data : error.message);
+        res.render('homepage', {
+            title: 'CRM Records | Integrating With HubSpot I Practicum',
+            crmRecords: [], // Pass an empty array if there's an error
+            error: 'Could not retrieve CRM data. Please check your API key, custom object ID, and network.'
+        });
+    }
+});
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data. Send this data along in the next route.
 
