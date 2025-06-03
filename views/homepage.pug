@@ -1,0 +1,42 @@
+//- views/homepage.pug
+doctype html
+html
+  head
+    title= title
+    style.
+      body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+      .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 800px; margin: 0 auto; }
+      h1 { text-align: center; color: #333; }
+      .top-link { text-align: center; margin-bottom: 20px; }
+      .top-link a { color: #007bff; text-decoration: none; font-weight: bold; font-size: 1.1em; }
+      .top-link a:hover { text-decoration: underline; }
+      table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+      th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+      th { background-color: #f2f2f2; color: #333; }
+      tr:nth-child(even) { background-color: #f9f9f9; }
+      .no-records { text-align: center; color: #666; margin-top: 20px; }
+      .error-message { color: red; text-align: center; margin-top: 20px; font-weight: bold; }
+  body
+    .container
+      .top-link
+      h1 Custom Object Table
+
+      a(href="/update-cobj") Add/Update this table
+
+      if error
+        .error-message= error
+      else if crmRecords && crmRecords.length > 0
+        table
+          thead
+            tr
+              th Name
+              th Company
+              th Price              
+          tbody
+            each record in crmRecords
+              tr
+                td= record.properties.name || 'N/A' 
+                td= record.properties.company || 'N/A'
+                td= record.properties.price || 'N/A' 
+      else
+        .no-records No records found.
