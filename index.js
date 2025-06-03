@@ -3,13 +3,20 @@ const axios = require('axios');
 const app = express();
 
 app.set('view engine', 'pug');
+app.set('views', './views');
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
+const HUBSPOT_API_BASE_URL = 'https://api.hubapi.com/crm/v3/objects';
 const PRIVATE_APP_ACCESS = '';
-
+const CUSTOM_OBJECT_TYPE_ID = '2-45620559';
+const CUSTOM_PROPERTIES = [
+    'name', 
+    'company',     
+    'price' 
+];
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 
 // * Code for Route 1 goes here
