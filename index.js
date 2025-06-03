@@ -80,7 +80,7 @@ app.post('/submit-cobj', async (req, res) => {
             newRecordData,
             {
                 headers: {
-                    Authorization: `Bearer ${HUBSPOT_API_KEY}`,
+                    Authorization: `Bearer ${PRIVATE_APP_ACCESS}`,
                     'Content-Type': 'application/json'
                 }
             }
