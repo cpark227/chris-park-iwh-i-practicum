@@ -11,7 +11,7 @@ app.use(express.json());
 // * Please DO NOT INCLUDE the private app access token in your repo. Don't do this practicum in your normal account.
 const HUBSPOT_API_BASE_URL = 'https://api.hubapi.com/crm/v3/objects';
 const PRIVATE_APP_ACCESS = '';
-const CUSTOM_OBJECT_TYPE_ID = '2-45620559';
+const CUSTOM_OBJECT_TYPE_ID = '2-45669167';
 const CUSTOM_PROPERTIES = [
     'name', 
     'company',     
